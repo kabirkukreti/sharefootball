@@ -19,8 +19,10 @@ The timebar (tidtaker): The timedisplay to the right of the comment field. This 
 
 ## GitHub-info
 
-[https://help.github.com/articles/fork-a-repo]
+[Fork a repo](https://help.github.com/articles/fork-a-repo)
+[Basics](http://gitref.org/basic/#commit)
+[Merging a pull request](https://help.github.com/articles/merging-a-pull-request)
+[Learn github 15 min](http://try.github.com/levels/1/challenges/1)
 
-http://gitref.org/basic/#commit
-https://help.github.com/articles/merging-a-pull-request
-http://try.github.com/levels/1/challenges/1
+
+
