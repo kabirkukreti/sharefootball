@@ -17,6 +17,11 @@ class Team(db.Model):
 	nickname = db.StringProperty() # team nickname given by its fans
 	date_added = db.DateTimeProperty(auto_now_add=True)
 
+	@classmethod
+	def team_from_name(cls, name):
+		return Team.all().filter("name =", name).fetch(10)[0]
+
+
 class Stadium(db.Model):
 	name = db.StringProperty()
 	capacity = db.IntegerProperty()
@@ -40,9 +45,10 @@ class Match(db.Model):
 	date_created = db.DateTimeProperty(auto_now_add=True) # The date for the match was added (autocomplete)
 	date_edited = db.DateTimeProperty(auto_now=True) # Date the entity information was edited (not piece)
 	year = db.IntegerProperty() # TODO: Remove (use date_played instead)
+
 	
 class Piece(db.Model):
-	author = db.ReferenceProperty(Contributor) #referencing the contributer whom added the piece of information
+	author = db.ReferenceProperty(Contributor) #referencing the contributor whom added the piece of information
 	match = db.ReferenceProperty(Match, collection_name='match_piece') #referencing the match
 	# state = db.IntegerProperty(default=1, choices=[0,1]) #Meaning if the piece is active or deleted. Only active pieces will be shown on the matchfeed.
 	  # 0-deleted, 1-active
@@ -51,10 +57,14 @@ class Piece(db.Model):
 	content = db.StringProperty() # the information itself.
 	content_print = db.StringProperty()
 	time_tag = db.IntegerProperty() # the inmatch time tag. This saves the matchtime for which the pieces of information belongs
-	time_tag_minutes = db.IntegerProperty() # same as time_tag, but just the minutes
 	date_created = db.DateTimeProperty(auto_now_add=True) # Date the piece was added
 	date_edited = db.DateTimeProperty(auto_now=True) # date last edited/ change of state.
 	funfact = db.BooleanProperty(default = False)
+
+	@property
+	def time_tag_minutes(self): # same as time_tag, but just the minutes
+		# return self.time_tag % 60
+		return ((self.time_tag - (self.time_tag % 60)) / 60)
 
 
 class Player(db.Model):

@@ -155,7 +155,6 @@ class Piece(webapp.RequestHandler):
     piece.match = models.Match.get(self.request.get('match_key'))
     piece.content = self.request.get('raw') # TODO: FIKS
     piece.time_tag = int(self.request.get('time_tag'))
-    piece.time_tag_minutes = ((piece.time_tag - (piece.time_tag % 60)) / 60)
 
     piece.put()
     # self.redirect('../match?match_key=%s' % self.request.get('match_key'))
@@ -264,12 +263,39 @@ class Clear(webapp.RequestHandler):
 
 class InitComments(webapp.RequestHandler):
     def get(self):
-        matches = models.Matches.all().fetch(100)
-        matches.filter("name =", "Brazil - Norway")
-        self.response.out.write(matches.key())
+        match_key = "ahFkZXZ-c2hhcmVmb290YmFsbHIMCxIFTWF0Y2gYpWgM"
+        match = db.get(match_key)
+        
+        comments = [
+            ["Great goal", "100"],
+            ["Amazing", "150"],
+            ["Incredible", "200"],
+            ["Truly outstanding", "250"],
+            ["Corner kick", "1000"],
+            ["Goal kick", "2500"],
+            ["Something", "35"],
+            ["Stuff", "895"],
+            ["Not so much", "297"],
+        ]
+        for c in comments:
+            piece = models.Piece()
+            piece.content = c[0]
+            piece.time_tag = int(c[1])
+            piece.match = match
+            piece.put()
+
+        self.response.out.write(match_key)
+
+
+class Testing(webapp.RequestHandler):
+    def get(self):
+        team = models.Team.team_from_name("Brazil")
+        self.response.out.write(team.national)
 
 class Init(webapp.RequestHandler):
   def get(self):
+
+    # teams = ["Scotland", "Norway", "Brazil", "Morocco"]
 
     teams = models.Team()
     teams.name = "Scotland"

@@ -1,4 +1,4 @@
-# Sharefootball_master_code
+# Sharefootball
 
 Code for our video streaming webpage
 

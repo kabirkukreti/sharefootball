@@ -5,6 +5,7 @@ from app import views
 
 application = webapp.WSGIApplication([
   ('/admin/match', views.AdminMatch),
+  ('/testing', views.Testing),
   ('/admin', views.Admin),
   ('/sandbox', views.Sandbox),
   ('/classify', views.Classify),
