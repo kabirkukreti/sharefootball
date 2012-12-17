@@ -16,3 +16,11 @@ Comment edit menu (kommentarmeny): This menu, indicated by the yellow circle mak
 The comment field (kommentarfelt): This is indicated with the green circle. Her the users can comment on specific moment within the match. If the user start writing the timebar to the right of the comment field turns green and stops so that the user knows which timetag the comment will be saved with. After pressing enter the comment written in the comment field is posted in the comment panel
 
 The timebar (tidtaker): The timedisplay to the right of the comment field. This keeps track of the time within the match. If the user start writing the timebar to the right of the comment field turns green and stops so that the user knows which timetag the comment will be saved with.
+
+
+## GitHub-info
+
+https://help.github.com/articles/fork-a-repo
+http://gitref.org/basic/#commit
+https://help.github.com/articles/merging-a-pull-request
+http://try.github.com/levels/1/challenges/1
