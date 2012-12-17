@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>TheFirstHalf</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+{% include "PART_HEADER.html" %}
+
+<div class="row">
+  <hr />
+
+  <div class="seven columns">   
+    <h2>Classify this</h2>
+    <p class="panel">{{piece.content}}</p>
+    <ul class="link-list">
+      <li><a href="">General</a></li>
+      <li><a href="">Goal</a></li>
+      <li><a href="">Free Kick</a></li>
+      <li><a href="">Corner</a></li>
+      <li><a href="">Yellow Card</a></li>
+      <li><a href="">Red Card</a></li>
+      <li><a href="">Fun Fact</a></li>
+      <li><a href="">Trick</a></li>
+      <li><a href="">None</a></li>
+    </ul>
+  </div>
+</div>
+
+
+{% include "PART_FOOTER.html" %}
+
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+  <script type"text/javascript">
+
+// $(document).ready(function() {
+//   $('form#search').on('submit', function(e){
+//     $.get("/search", $(this).serialize());
+//   });
+// );
+  
+// });
+
+  </script>
+</body>
+</html>
+

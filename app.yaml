@@ -1,0 +1,28 @@
+application: sharefootball
+version: 2
+runtime: python
+api_version: 1
+
+builtins:
+- datastore_admin: on
+- appstats: off
+
+default_expiration: "5d"
+
+handlers:
+- url: /_ah/admin.*
+  script: google.appengine.ext.admin.application
+  login: admin
+- url: /javascripts
+  static_dir: static/javascripts
+- url: /stylesheets
+  static_dir: static/stylesheets
+- url: /images
+  static_dir: static/images
+- url: /docs
+  static_dir: static/docs
+- url: /fonts
+  static_dir: static/fonts 
+- url: /.*
+  script: main.py
+
