@@ -1,9 +1,8 @@
-Sharefootball_master_code
-=========================
+# Sharefootball_master_code
 
 Code for our video streaming webpage
 
-Conceptual clarification
+## Conceptual clarification
 
 The search field (søkefelt): This is indicated with the red circle on the screenshot. In this field the user can search for other matches within the service.
 
@@ -20,7 +19,8 @@ The timebar (tidtaker): The timedisplay to the right of the comment field. This 
 
 ## GitHub-info
 
-https://help.github.com/articles/fork-a-repo
+[https://help.github.com/articles/fork-a-repo]
+
 http://gitref.org/basic/#commit
 https://help.github.com/articles/merging-a-pull-request
 http://try.github.com/levels/1/challenges/1
