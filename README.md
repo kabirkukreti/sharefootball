@@ -24,5 +24,8 @@ The timebar (tidtaker): The timedisplay to the right of the comment field. This 
 * [Merging a pull request](https://help.github.com/articles/merging-a-pull-request)
 * [Learn github 15 min](http://try.github.com/levels/1/challenges/1)
 
+## Copyright
+
+This code cannot be reused without permission. Send an email if you'd like to use the code.
 
 

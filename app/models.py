@@ -48,7 +48,6 @@ class Match(db.Model):
 	thumbnail = db.StringProperty() # URL pointing tumbnail 
 	date_created = db.DateTimeProperty(auto_now_add=True) # The date for the match was added (autocomplete)
 	date_edited = db.DateTimeProperty(auto_now=True) # Date the entity information was edited (not piece)
-	year = db.IntegerProperty() # TODO: Remove (use date_played instead)
 
 	
 class Piece(db.Model):
