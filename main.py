@@ -17,8 +17,11 @@ application = webapp.WSGIApplication([
   ('/', views.IndexHandler),
   ('/search', views.Search),
   ('/team', views.Team),
-  ('/init/comments', views.InitComments),
-  ('/init', views.Init),
+  ('/init/pieces/(.*)', views.InitPieces),
+  ('/init/matches', views.InitMatches),
+  ('/init/teams', views.InitTeams),
+  ('/init/stadiums', views.InitStadiums),
+  # ('/init', views.Init),
   ('/init/funfacts', views.InitFunfacts),
   ('/clear', views.Clear),
 

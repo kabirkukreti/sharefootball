@@ -27,6 +27,10 @@ class Stadium(db.Model):
 	capacity = db.IntegerProperty()
 	information = db.StringProperty()
 
+	@classmethod
+	def stadium_from_name(cls, name):
+		return Stadium.all().filter("name =", name).fetch(10)[0]
+
 class Match(db.Model):
 	home_team = db.ReferenceProperty(Team, collection_name="home_team")
 	away_team = db.ReferenceProperty(Team, collection_name="away_team")
@@ -63,7 +67,6 @@ class Piece(db.Model):
 
 	@property
 	def time_tag_minutes(self): # same as time_tag, but just the minutes
-		# return self.time_tag % 60
 		return ((self.time_tag - (self.time_tag % 60)) / 60)
 
 

@@ -63,7 +63,7 @@
           {% for m in matches %}
 				  <li>
             <h4>
-              <a href="/match?match_key={{m.key}}">{{ m.name}} ({{m.year}})</a>
+              <a href="/match?match_key={{m.key}}">{{ m.name }} ({{ m.date_played|date:"Y" }})</a>
             </h4>
           </li>
 					{% endfor %}
@@ -77,18 +77,10 @@
 
   <div class="row">
     <div class="four columns">
-      <h2>Development:</h2>
+      <h2><a href="../admin">Admin</a></h2>
     </div>
     <div class="eight columns">
-      <form action="/init" method="get">
-        <input type="submit" value="Add matches">
-      </form>
-      <form action="#" method="get">
-        <input type="submit" value="Add comments">
-      </form>
-      <form action="#" method="get">
-        <input type="submit" value="Reset">
-      </form>
+      <p> &nbsp;</p>
     </div>
   </div>
     

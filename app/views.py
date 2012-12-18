@@ -259,190 +259,104 @@ class Clear(webapp.RequestHandler):
       
     except:
       self.response.out.write("Noe gikk galt")
-      
-
-class InitComments(webapp.RequestHandler):
-    def get(self):
-        match_key = "ahFkZXZ-c2hhcmVmb290YmFsbHIMCxIFTWF0Y2gYpWgM"
-        match = db.get(match_key)
-        
-        comments = [
-            ["Great goal", "100"],
-            ["Amazing", "150"],
-            ["Incredible", "200"],
-            ["Truly outstanding", "250"],
-            ["Corner kick", "1000"],
-            ["Goal kick", "2500"],
-            ["Something", "35"],
-            ["Stuff", "895"],
-            ["Not so much", "297"],
-        ]
-        for c in comments:
-            piece = models.Piece()
-            piece.content = c[0]
-            piece.time_tag = int(c[1])
-            piece.match = match
-            piece.put()
-
-        self.response.out.write(match_key)
 
 
 class Testing(webapp.RequestHandler):
     def get(self):
         team = models.Team.team_from_name("Brazil")
         self.response.out.write(team.national)
+      
 
-class Init(webapp.RequestHandler):
+class InitPieces(webapp.RequestHandler):
+    def get(self, match_key):
+        match = db.get(match_key)
+ 
+        if match.name == "Brazil - Norway":
+            comments = [
+                ["Great goal", "100"],
+                ["Amazing", "150"],
+                ["Incredible", "200"],
+                ["Truly outstanding", "250"],
+                ["Corner kick", "1000"],
+                ["Goal kick", "2500"],
+                ["Something", "35"],
+                ["Stuff", "895"],
+                ["Not so much", "297"],
+            ]
+        
+            for c in comments:
+                piece = models.Piece()
+                piece.content = c[0]
+                piece.time_tag = int(c[1])
+                piece.match = match
+                piece.put()
+
+            self.redirect("../../match?match_key=%s" % match_key)
+
+        else:
+            self.response.out.write("There are no pre-defined comments for this match")
+
+
+class InitTeams(webapp.RequestHandler):
   def get(self):
 
-    # teams = ["Scotland", "Norway", "Brazil", "Morocco"]
+    teams = ["Scotland", "Norway", "Brazil", "Morocco"]
 
-    teams = models.Team()
-    teams.name = "Scotland"
-    teams.national = True
-    teams.put()
+    for t in teams:
+        team = models.Team()
+        team.name = t
+        team.national = True
+        team.put()
 
-    teamn = models.Team()
-    teamn.name = "Norway"
-    teamn.national = True
-    teamn.put()
+    self.response.out.write("Added the following teams: " + str([t for t in teams]),)
 
-    teamb = models.Team()
-    teamb.name = "Brazil"
-    teamb.national = True
-    teamb.put()
+class InitStadiums(webapp.RequestHandler):
+  def get(self):
 
-    teamm = models.Team()
-    teamm.name = "Morocco"
-    teamm.national = True
-    teamm.put()
-    
-    stadion1 = models.Stadium()
-    stadion1.name = "Stade Velodrome"
-    stadion1.capacity = 42000
-    stadion1.information = "The Stade Velodrome is a football stadium in Marseille, France. It is home to the Olympique de Marseille football club of Ligue 1"
-    stadion1.put()
+    stadiums = [
+        ["Stade Velodrome", "42000", "The Stade Velodrome is a football stadium in Marseille, France. It is home to the Olympique de Marseille football club of Ligue 1"],
+        ["Stade de France", "80000", "The Stade de France is the national stadium of France, situated just north of Paris in the commune of Saint-Denis. It has an all-seater capacity of 81,338, making it the eighth largest stadium in Europe, and is used by both the France national football team and French rugby union team for international competition. On 12 July 1998, France defeated Brazil in the FIFA World Cup Final contested at the stadium."],
+        ["Stade de la Mosson", "32000", "Stade de la Mosson is a football stadium in Montpellier, France. It is the home of Montpellier HSC (Ligue 1) and has a capacity of 32,900."], 
+        ["Stade de la Beaujoire", "42000", "Stade de la Beaujoire is the home of the FC Nantes football club."],
+        ["Stade Geoffroy-Guichard", "27000", "Stade Geoffroy-Guichard is used primarily for football matches, and tournaments such as the 1984 European Football Championship, the Football World Cup 1998 and the Confederations Cup 2003."],
+        ["Stade Chaban-Delmas", "35000", "Stade Chaban-Delmas is a sporting stadium located in the city of Bordeaux, France. It is the home ground of FC Girondins de Bordeaux."]
+    ]
 
-    stadion2 = models.Stadium()
-    stadion2.name = "Stade de France"
-    stadion2.capacity = 80000
-    stadion2.information = "The Stade de France is the national stadium of France, situated just north of Paris in the commune of Saint-Denis. It has an all-seater capacity of 81,338, making it the eighth largest stadium in Europe, and is used by both the France national football team and French rugby union team for international competition. On 12 July 1998, France defeated Brazil in the FIFA World Cup Final contested at the stadium."
-    stadion2.put()
+    for s in stadiums:
+        stadium = models.Stadium()
+        stadium.name = s[0]
+        stadium.capacity = int(s[1])
+        stadium.information = s[2]
+        stadium.put()
 
-    stadion3 = models.Stadium()
-    stadion3.name = "Stade de la Mosson"
-    stadion3.capacity = 32000
-    stadion3.information = "Stade de la Mosson is a football stadium in Montpellier, France. It is the home of Montpellier HSC (Ligue 1) and has a capacity of 32,900."
-    stadion3.put()
+    self.response.out.write("Added the following stadiums: " + str([s[0] for s in stadiums]),)
 
-    stadion6 = models.Stadium()
-    stadion6.name = "Stade de la Beaujoire"
-    stadion6.capacity = 42000
-    stadion6.information = "Stade de la Beaujoire is the home of the FC Nantes football club."
-    stadion6.put()
+class InitMatches(webapp.RequestHandler):
+  def get(self):
 
-    stadion4 = models.Stadium()
-    stadion4.name = "Stade Geoffroy-Guichard"
-    stadion4.capacity = 27000
-    stadion4.information = "Stade Geoffroy-Guichard is used primarily for football matches, and tournaments such as the 1984 European Football Championship, the Football World Cup 1998 and the Confederations Cup 2003."
-    stadion4.put()
+    matches = [
+        ["Brazil - Scotland", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "3QgGAnWL-64", "55689", "Stade de France", "1998", "06", "10"],
+        ["Morocco - Norway", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "HiOB66VXSGE", "45333", "Stade de la Mosson", "1998", "06", "10"],
+        ["Scotland - Norway", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "wBIKzLJZiFY", "23422", "Stade Chaban-Delmas", "1998", "06", "16"],
+        ["Brazil - Morocco", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "HiOB66VXSGE", "50000", "Stade de la Beaujoire", "1998", "06", "16"],
+        ["Brazil - Norway", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "m_nU1h8d0v0", "50000", "Stade Velodrome", "1998", "06", "23"],
+        ["Scotland - Morocco", "http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg", "NPBBo2Z2QmY", "50000", "Stade Geoffroy-Guichard", "1998", "06", "23"],
+    ]
 
-    stadion5 = models.Stadium()
-    stadion5.name = "Stade Chaban-Delmas"
-    stadion5.capacity = 35000
-    stadion5.information = "Stade Chaban-Delmas is a sporting stadium located in the city of Bordeaux, France. It is the home ground of FC Girondins de Bordeaux."
-    stadion5.put()
-    
-    test1 = models.Match()
-    test1.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test1.video_url="3QgGAnWL-64"
-    test1.name = "Brazil - Scotland"
-    test1.year = 1998
-    test1.attendance = 556893
-    test1.stadium = stadion2
-    test1.date_played = datetime.date(1998, 06, 10)
-    test1.home_team = teamb
-    test1.away_team = teams
-    test1.put()
+    for m in matches:
+        home, away = m[0].split(" - ")
+        match = models.Match()
+        match.name = m[0]
+        match.thumnail = m[1]
+        match.video_url = m[2]
+        match.attendance = int(m[3])
+        match.stadium = models.Stadium.stadium_from_name(m[4])
+        match.date_played = datetime.date(int(m[5]), int(m[6]), int(m[7]))
+        match.home_team = models.Team.team_from_name(home)
+        match.away_team = models.Team.team_from_name(away)
+        match.put()
 
-    test2 = models.Match()
-    test2.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test2.video_url="HiOB66VXSGE"
-    test2.name = "Morocco - Norway"
-    test2.year = 1998
-    test2.attendance = 45333
-    test2.date_played = datetime.date(1998, 06, 10)
-    test2.stadium = stadion3
-    test2.home_team = teamm
-    test2.away_team = teamn
-    test2.put()
-
-    test3 = models.Match()
-    test3.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test3.video_url="wBIKzLJZiFY"
-    test3.name = "Scotland - Norway"
-    test3.year = 1998
-    test3.attendance = 23422
-    test3.date_played = datetime.date(1998, 06, 16)
-    test3.stadium = stadion5
-    test3.home_team = teams
-    test3.away_team = teamn
-    test3.put()
-
-    test4 = models.Match()
-    test4.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test4.video_url="HiOB66VXSGE"
-    test4.name = "Brazil - Morocco"
-    test4.year = 1998
-    test4.date_played = datetime.date(1998, 06, 16)
-    test4.stadium = stadion6
-    test4.home_team = teamb
-    test4.away_team = teamm
-    test4.put()
-
-    test5 = models.Match()
-    test5.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test5.video_url="m_nU1h8d0v0"
-    test5.name = "Brazil - Norway"
-    test5.date_played = datetime.date(1998, 06, 23)
-    test5.year = 1998
-    test5.stadium = stadion1
-    test5.home_team = teamb
-    test5.away_team = teamn
-    test5.put()
-
-    test6 = models.Match()
-    test6.thumbnail="http://bilder.vgb.no/1224/4col/img_44876e70eaf7f.jpg"
-    test6.video_url="NPBBo2Z2QmY"
-    test6.name = "Scotland - Morocco"
-    test6.year = 1998
-    test6.date_played = datetime.date(1998, 06, 23)
-    test6.stadium = stadion4
-    test6.home_team = teams
-    test6.away_team = teamm
-    test6.put()
-
-#    piece1 = models.Piece()
-#    piece1.match = test5
-#    piece1.time_tag = 3610
-#    piece1.content = "GOAL! Great goal by T. A. Flo. Norways fate remains undecided!"
-#    piece1.put()
-
-#    player1 = models.Player()
-#    player1.nickname = "Rekdal"
-#    player1.bio = "http://en.wikipedia.org/wiki/Kjetil_Rekdal"
-#    #date_born = ????
-#    player1.put()
-
-#    appearance1 = models.Appearance()
-#    appearance1.number = 10
-#    appearance1.position_played = "Midfielder"
-#    appearance1.player = player1
-#    appearance1.match = test5
-#    appearance1.put()
-
-
-    self.response.out.write("Seks kamper lagt inn samt metadata til disse kampene er lagt inn. Slaa deg lose med tagging",)
+    self.response.out.write("Added the following matches: " + str([m[0] for m in matches]),)
 
 
 
