@@ -85,7 +85,7 @@ class Match(webapp.RequestHandler):
     home_team = match.home_team.key()
     away_team = match.away_team.key()
     
-    pieces = match.match_piece.order("time_tag").filter("funfact =", False)
+    pieces = match.match_piece.order("time_tag").filter("funfact =", False).order("time_tag")
 
     # dette kan trolig gjoeres paa en langt lurere maate:
     try:
@@ -273,15 +273,32 @@ class InitPieces(webapp.RequestHandler):
  
         if match.name == "Brazil - Norway":
             comments = [
-                ["Great goal", "100"],
-                ["Amazing", "150"],
-                ["Incredible", "200"],
-                ["Truly outstanding", "250"],
-                ["Corner kick", "1000"],
-                ["Goal kick", "2500"],
-                ["Something", "35"],
-                ["Stuff", "895"],
-                ["Not so much", "297"],
+                ["Starting Lineups", "50"],
+                ["Match start", "119"],
+                ["We at ESPN wish to thank Budweisser, The US Army, FedEx, Nike, National Car Rental, British Airways and Canon for allowing us to bring you tonights game commercial free!", "128"],
+                ["Corner for Norway", "137"],
+                ["Shot by Rekdal", "158"],
+                ["Chance for Ronaldo, but Bebeto is offisde", "342"],
+                ["Huge chance for Brazil, great pass by Ronaldo. Bebeto's just a foot short of scoring", "5024"],
+                ["Goal Brazil! Header by Bebeto", "5114"],
+                ["Sub: xxx (out) <-> J. Flo (in)", "5189"],
+                ["Goal Norway! Tore Andre Flo", "5417"],
+                ["This is Tore Andre Flo's 13th international goal)", "5441"],
+                ["Chance for Norway, J. Flo's heades towards his brother T.A. Flo, but the latter fails to convert", "5502"],
+                ["Chance for Norway. The Flo brothers are causing trouble for the Brazilian defence once again", "5542"],
+                ["Penalty for Norway. T.A. Flo is pulled down by Baiano", "5586"],
+                ["Rekdal to take the penalty", "5729"],
+                ["Goal Norway! Rekdal scores!", "5770"],
+                ["Norway are now through to the next round", "5786"],
+                ["E. Olsen, very anxious to see the game finished", "5956"],
+                ["Free kick for Brazil. Carlos to shoot?", "6065"],
+                ["Shot saved by Grodas", "6085"],
+                ["Game over. Norway are through", "6100"],
+                ["corner for Norway", "1334"],
+                ["Bjornebye", "1356"],
+                ["Aweful corner by Bjornebye", "1370"],
+                ["Free kick for Norway", "2433"],
+                ["Ronaldo. The slim version!", "344"],
             ]
         
             for c in comments:
