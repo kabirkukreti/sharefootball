@@ -10,6 +10,7 @@ application = webapp.WSGIApplication([
   ('/sandbox', views.Sandbox),
   ('/classify', views.Classify),
   ('/match', views.Match),
+  ('/commentajax', views.CommentAjax),
   ('/piece', views.Piece),
   ('/appearance', views.Appearance),
   ('/userdetails', views.UserDetails),

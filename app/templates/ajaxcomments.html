@@ -1,0 +1,14 @@
+              {% for p in pieces %}
+              <li class="piece" id="{{p.time_tag}}" user=" - {{p.author.name}}">
+                <i class="foundicon-globe"></i>
+                <a class="piece-anchor" href="#" onclick="player.seekTo({{p.time_tag}}, true);">
+                  <strong>{{p.time_tag_minutes|stringformat:"02d"}}</strong>:
+                  {{p.content|capfirst}}
+                </a>
+               
+                <small><i class="foundicon-remove"></i>Remove</small>
+                <small><i class="foundicon-edit"></i>Edit</small>
+                <small><i class="foundicon-"></i>Comment</small>
+
+              </li>
+              {% endfor %}

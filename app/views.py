@@ -157,7 +157,20 @@ class Piece(webapp.RequestHandler):
     piece.time_tag = int(self.request.get('time_tag'))
 
     piece.put()
-    # self.redirect('../match?match_key=%s' % self.request.get('match_key'))
+    self.redirect('../commentajax?match_key=%s' % self.request.get('match_key'))
+    
+
+
+class CommentAjax(webapp.RequestHandler):
+  def get(self):
+    match = models.Match.get(self.request.get('match_key'))
+    pieces = match.match_piece.order("time_tag").filter("funfact =", False).order("time_tag")
+
+    template_values = {
+				'pieces': pieces,
+				}
+    path = os.path.join(os.path.dirname(__file__), 'templates/ajaxcomments.html')
+    self.response.out.write(template.render(path, template_values))
 
 
 class Appearance(webapp.RequestHandler):

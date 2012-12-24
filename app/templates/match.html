@@ -190,7 +190,7 @@
 
   <!-- Included JS Files (Uncompressed) for UI and suggest -->
 	<script src="javascripts/jquery-ui.js"></script>
-	<script src="javascripts/playersuggest.js"></script>
+
 
   <!-- Initialize JS Plugins -->
 	<script src="javascripts/app.js"></script>
@@ -273,6 +273,8 @@ function onPlayerReady(event) {
     document.getElementById("time_tag").value = timeTag - 2;
   }, 1000);
 
+
+
   $('input#comment_form_input').bind('keypress', function (e) {
     clearInterval(timer);
     $('#comment_form_button').removeClass("postfix secondary button expand").addClass("postfix button expand");
@@ -293,8 +295,10 @@ function onPlayerReady(event) {
 
   $('#comment_form').on('submit', function(e){
     e.preventDefault();
-    $.post("/piece", $(this).serialize(), function(){
+    $.post("/piece", $(this).serialize(), function(data){
       // success
+		     
+      
       $('#comment_form_input').val('');
       $('#comment_form_button').removeClass("postfix button expand").addClass("postfix secondary button expand");
       $('#side').load('/match?match_key={{match.key}} #comments');
@@ -307,8 +311,13 @@ function onPlayerReady(event) {
     printTime = "at " + minutes_print + ":" + second_print;
     document.getElementById("comment_form_button").value = printTime;
     document.getElementById("time_tag").value = timeTag - 2;
+    
   }, 1000);
-    });
+		
+
+
+    $( "#comments" ).empty().append( data );
+		  });
   });
 }
 
@@ -333,6 +342,7 @@ function freezeTime() {
 
 
   </script>
+<script src="javascripts/playersuggest.js"></script>
 
 
 
